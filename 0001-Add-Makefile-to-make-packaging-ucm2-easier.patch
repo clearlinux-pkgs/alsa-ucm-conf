@@ -1,27 +1,26 @@
-From 506b4152b949fb341522e9f853cee04cc3fcc115 Mon Sep 17 00:00:00 2001
+From 790e5f2ed96bcf4bc59579d7d50dfe98c74a87f2 Mon Sep 17 00:00:00 2001
 From: Auke Kok <auke-jan.h.kok@intel.com>
 Date: Thu, 5 Mar 2020 21:33:59 -0800
 Subject: [PATCH] Add Makefile to make packaging ucm2 easier.
 
 ---
- Makefile | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ Makefile | 7 +++++++
+ 1 file changed, 7 insertions(+)
  create mode 100644 Makefile
 
 diff --git a/Makefile b/Makefile
 new file mode 100644
-index 0000000..2edb7b4
+index 0000000..86f8d40
 --- /dev/null
 +++ b/Makefile
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,7 @@
 +all:
 +
 +check:
 +
 +install:
-+	cd ucm2
-+	mkdir -p $(DESTDIR)/usr/share/alsa
-+	cp -arv * $(DESTDIR)/usr/share/alsa/
++	mkdir -p $(DESTDIR)/usr/share/alsa/ucm2
++	cp -arv ucm2/* $(DESTDIR)/usr/share/alsa/ucm2/
 -- 
 2.25.1
 

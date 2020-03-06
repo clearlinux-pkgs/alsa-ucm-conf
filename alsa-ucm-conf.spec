@@ -4,7 +4,7 @@
 #
 Name     : alsa-ucm-conf
 Version  : 1.2.2
-Release  : 1
+Release  : 2
 URL      : https://github.com/alsa-project/alsa-ucm-conf/archive/v1.2.2.tar.gz
 Source0  : https://github.com/alsa-project/alsa-ucm-conf/archive/v1.2.2.tar.gz
 Summary  : No detailed summary available
@@ -45,7 +45,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583472930
+export SOURCE_DATE_EPOCH=1583473193
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -58,7 +58,7 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1583472930
+export SOURCE_DATE_EPOCH=1583473193
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alsa-ucm-conf
 cp %{_builddir}/alsa-ucm-conf-1.2.2/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f
@@ -69,10 +69,6 @@ cp %{_builddir}/alsa-ucm-conf-1.2.2/LICENSE %{buildroot}/usr/share/package-licen
 
 %files data
 %defattr(-,root,root,-)
-/usr/share/alsa/LICENSE
-/usr/share/alsa/Makefile
-/usr/share/alsa/README.md
-/usr/share/alsa/ucm/README.md
 /usr/share/alsa/ucm2/DAISY-I2S/DAISY-I2S.conf
 /usr/share/alsa/ucm2/DAISY-I2S/HiFi.conf
 /usr/share/alsa/ucm2/DB410c/DB410c.conf
