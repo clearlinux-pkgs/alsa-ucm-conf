@@ -1,5 +1,5 @@
 PKG_NAME := alsa-ucm-conf
-URL = https://github.com/alsa-project/alsa-ucm-conf/archive/v1.2.5/alsa-ucm-conf-1.2.5.tar.gz
+URL = https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.tar.bz2
 ARCHIVES = 
 
 include ../common/Makefile.common
