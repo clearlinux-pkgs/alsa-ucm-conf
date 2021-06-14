@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x8380596DA6E59C91 (release@alsa-project.org)
 #
 Name     : alsa-ucm-conf
-Version  : 1.2.5
-Release  : 6
-URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.tar.bz2
-Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.tar.bz2
-Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.tar.bz2.sig
+Version  : 1.2.5.1
+Release  : 7
+URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.1.tar.bz2
+Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.1.tar.bz2
+Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.1.tar.bz2.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -39,8 +39,8 @@ license components for the alsa-ucm-conf package.
 
 
 %prep
-%setup -q -n alsa-ucm-conf-1.2.4.81.g4884e
-cd %{_builddir}/alsa-ucm-conf-1.2.4.81.g4884e
+%setup -q -n alsa-ucm-conf-1.2.5.1
+cd %{_builddir}/alsa-ucm-conf-1.2.5.1
 %patch1 -p1
 
 %build
@@ -48,7 +48,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1622567016
+export SOURCE_DATE_EPOCH=1623691802
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -61,10 +61,10 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1622567016
+export SOURCE_DATE_EPOCH=1623691802
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alsa-ucm-conf
-cp %{_builddir}/alsa-ucm-conf-1.2.4.81.g4884e/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f
+cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f
 %make_install
 
 %files
@@ -124,8 +124,12 @@ cp %{_builddir}/alsa-ucm-conf-1.2.4.81.g4884e/LICENSE %{buildroot}/usr/share/pac
 /usr/share/alsa/ucm2/Tegra/alc5632/alc5632.conf
 /usr/share/alsa/ucm2/Tegra/max98090/HiFi.conf
 /usr/share/alsa/ucm2/Tegra/max98090/max98090.conf
-"/usr/share/alsa/ucm2/Tegra/rt5640/ASUS Google Nexus 7 ALC5642.conf"
-"/usr/share/alsa/ucm2/Tegra/wm8903/Acer Iconia Tab A500 WM8903.conf"
+/usr/share/alsa/ucm2/Tegra/rt5640/Google-Nexus-7-HiFi.conf
+/usr/share/alsa/ucm2/Tegra/rt5640/Google-Nexus-7.conf
+/usr/share/alsa/ucm2/Tegra/tegra-hda/tegra-hda-HiFi.conf
+/usr/share/alsa/ucm2/Tegra/tegra-hda/tegra-hda.conf
+/usr/share/alsa/ucm2/Tegra/wm8903/Acer-A500-HiFi.conf
+/usr/share/alsa/ucm2/Tegra/wm8903/Acer-A500.conf
 /usr/share/alsa/ucm2/USB-Audio/Dell-WD15-Dock-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/Dell-WD15-Dock.conf
 /usr/share/alsa/ucm2/USB-Audio/Gigabyte-Aorus-Master-Front-Headphone.conf
@@ -265,6 +269,7 @@ cp %{_builddir}/alsa-ucm-conf-1.2.4.81.g4884e/LICENSE %{buildroot}/usr/share/pac
 /usr/share/alsa/ucm2/conf.d/DB820c/DB820c.conf
 /usr/share/alsa/ucm2/conf.d/sdm845/DB845c.conf
 /usr/share/alsa/ucm2/conf.d/sm8250/Qualcomm-RB5-WSA8815-Speakers-DMIC0.conf
+/usr/share/alsa/ucm2/conf.d/tegra-hda/tegra-hda.conf
 "/usr/share/alsa/ucm2/conf.d/tegra/ASUS Google Nexus 7 ALC5642.conf"
 "/usr/share/alsa/ucm2/conf.d/tegra/Acer Iconia Tab A500 WM8903.conf"
 "/usr/share/alsa/ucm2/conf.d/tegra/Compal PAZ00.conf"
