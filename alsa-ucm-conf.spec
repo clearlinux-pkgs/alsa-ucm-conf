@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x8380596DA6E59C91 (release@alsa-project.org)
 #
 Name     : alsa-ucm-conf
-Version  : 1.2.5.1
-Release  : 7
-URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.1.tar.bz2
-Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.1.tar.bz2
-Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.5.1.tar.bz2.sig
+Version  : 1.2.6.3
+Release  : 8
+URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.6.3.tar.bz2
+Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.6.3.tar.bz2
+Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.6.3.tar.bz2.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -20,7 +20,10 @@ Patch1: 0001-Add-Makefile-to-make-packaging-ucm2-easier.patch
 %description
 # alsa-ucm-conf
 ## ALSA Use Case Manager configuration
-![Validate UCM configuration](https://github.com/alsa-project/alsa-ucm-conf/workflows/Validate%20UCM%20configuration/badge.svg?branch=master)
+### Installation
+Copy the ucm and ucm2 trees to the alsa-lib configuration directory
+(usually located in /usr/share/alsa) including symlinks. The files
+files are extra (only informational).
 
 %package data
 Summary: data components for the alsa-ucm-conf package.
@@ -39,8 +42,8 @@ license components for the alsa-ucm-conf package.
 
 
 %prep
-%setup -q -n alsa-ucm-conf-1.2.5.1
-cd %{_builddir}/alsa-ucm-conf-1.2.5.1
+%setup -q -n alsa-ucm-conf-1.2.6.3
+cd %{_builddir}/alsa-ucm-conf-1.2.6.3
 %patch1 -p1
 
 %build
@@ -48,23 +51,23 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623691802
+export SOURCE_DATE_EPOCH=1645057211
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1623691802
+export SOURCE_DATE_EPOCH=1645057211
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alsa-ucm-conf
-cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f
+cp %{_builddir}/alsa-ucm-conf-1.2.6.3/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f
 %make_install
 
 %files
@@ -72,17 +75,74 @@ cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-lic
 
 %files data
 %defattr(-,root,root,-)
-/usr/share/alsa/ucm2/HDA-Intel/HDA-Capture-value.conf
-/usr/share/alsa/ucm2/HDA-Intel/HDA-Intel.conf
-/usr/share/alsa/ucm2/HDA-Intel/HDAudio-DualCodecs.conf
-/usr/share/alsa/ucm2/HDA-Intel/HDAudio-Gigabyte-ALC1220DualCodecs.conf
-/usr/share/alsa/ucm2/HDA-Intel/HDAudio-Lenovo-DualCodecs.conf
-/usr/share/alsa/ucm2/HDA-Intel/Hdmi.conf
-/usr/share/alsa/ucm2/HDA-Intel/HiFi-acp.conf
-/usr/share/alsa/ucm2/HDA-Intel/HiFi-analog.conf
-/usr/share/alsa/ucm2/HDA-Intel/HiFi-dual.conf
-/usr/share/alsa/ucm2/HDA-Intel/HiFi.conf
-/usr/share/alsa/ucm2/HDA-Intel/init.conf
+/usr/share/alsa/ucm2/HDA/DualCodecs/DualCodecs.conf
+/usr/share/alsa/ucm2/HDA/DualCodecs/HiFi.conf
+/usr/share/alsa/ucm2/HDA/HDA-Capture-value.conf
+/usr/share/alsa/ucm2/HDA/HDA.conf
+/usr/share/alsa/ucm2/HDA/Hdmi.conf
+/usr/share/alsa/ucm2/HDA/HiFi-acp.conf
+/usr/share/alsa/ucm2/HDA/HiFi-analog.conf
+/usr/share/alsa/ucm2/HDA/HiFi.conf
+/usr/share/alsa/ucm2/HDA/init.conf
+/usr/share/alsa/ucm2/Intel/SOF/HiFi.conf
+/usr/share/alsa/ucm2/Intel/SOF/SOF.conf
+/usr/share/alsa/ucm2/Intel/bdw-rt5677/HiFi.conf
+/usr/share/alsa/ucm2/Intel/bdw-rt5677/bdw-rt5677.conf
+/usr/share/alsa/ucm2/Intel/broadwell-rt286/HiFi.conf
+/usr/share/alsa/ucm2/Intel/broadwell-rt286/broadwell-rt286.conf
+/usr/share/alsa/ucm2/Intel/broxton-rt298/Hdmi.conf
+/usr/share/alsa/ucm2/Intel/broxton-rt298/HiFi.conf
+/usr/share/alsa/ucm2/Intel/broxton-rt298/broxton-rt298.conf
+/usr/share/alsa/ucm2/Intel/bytcht-cx2072x/HiFi.conf
+/usr/share/alsa/ucm2/Intel/bytcht-cx2072x/bytcht-cx2072x.conf
+/usr/share/alsa/ucm2/Intel/bytcht-es8316/HiFi-Components.conf
+/usr/share/alsa/ucm2/Intel/bytcht-es8316/HiFi-LongName.conf
+/usr/share/alsa/ucm2/Intel/bytcht-es8316/HiFi.conf
+/usr/share/alsa/ucm2/Intel/bytcht-es8316/bytcht-es8316.conf
+/usr/share/alsa/ucm2/Intel/bytcr-rt5640/HiFi-Components.conf
+/usr/share/alsa/ucm2/Intel/bytcr-rt5640/HiFi-LongName.conf
+/usr/share/alsa/ucm2/Intel/bytcr-rt5640/HiFi.conf
+/usr/share/alsa/ucm2/Intel/bytcr-rt5640/bytcr-rt5640.conf
+/usr/share/alsa/ucm2/Intel/bytcr-rt5651/HiFi-Components.conf
+/usr/share/alsa/ucm2/Intel/bytcr-rt5651/HiFi-LongName.conf
+/usr/share/alsa/ucm2/Intel/bytcr-rt5651/HiFi.conf
+/usr/share/alsa/ucm2/Intel/bytcr-rt5651/bytcr-rt5651.conf
+/usr/share/alsa/ucm2/Intel/bytcr-wm5102/HiFi.conf
+/usr/share/alsa/ucm2/Intel/bytcr-wm5102/bytcr-wm5102.conf
+/usr/share/alsa/ucm2/Intel/cht-bsw-rt5672/HiFi.conf
+/usr/share/alsa/ucm2/Intel/cht-bsw-rt5672/cht-bsw-rt5672.conf
+/usr/share/alsa/ucm2/Intel/chtmax98090/HiFi.conf
+/usr/share/alsa/ucm2/Intel/chtmax98090/chtmax98090.conf
+/usr/share/alsa/ucm2/Intel/chtnau8824/HiFi.conf
+/usr/share/alsa/ucm2/Intel/chtnau8824/chtnau8824.conf
+/usr/share/alsa/ucm2/Intel/chtrt5645/HiFi.conf
+/usr/share/alsa/ucm2/Intel/chtrt5645/chtrt5645.conf
+/usr/share/alsa/ucm2/Intel/chtrt5650/HiFi.conf
+/usr/share/alsa/ucm2/Intel/chtrt5650/chtrt5650.conf
+/usr/share/alsa/ucm2/Intel/hda-dsp/Hdmi1.conf
+/usr/share/alsa/ucm2/Intel/hda-dsp/Hdmi2.conf
+/usr/share/alsa/ucm2/Intel/hda-dsp/HiFi.conf
+/usr/share/alsa/ucm2/Intel/hda-dsp/hda-dsp.conf
+/usr/share/alsa/ucm2/Intel/kblrt5660/Hdmi1.conf
+/usr/share/alsa/ucm2/Intel/kblrt5660/Hdmi2.conf
+/usr/share/alsa/ucm2/Intel/kblrt5660/HiFi.conf
+/usr/share/alsa/ucm2/Intel/kblrt5660/kblrt5660.conf
+/usr/share/alsa/ucm2/Intel/skylake-rt286/Hdmi1.conf
+/usr/share/alsa/ucm2/Intel/skylake-rt286/Hdmi2.conf
+/usr/share/alsa/ucm2/Intel/skylake-rt286/HiFi.conf
+/usr/share/alsa/ucm2/Intel/skylake-rt286/skylake-rt286.conf
+/usr/share/alsa/ucm2/Intel/sof-ehl-rt5660/Hdmi.conf
+/usr/share/alsa/ucm2/Intel/sof-ehl-rt5660/HiFi.conf
+/usr/share/alsa/ucm2/Intel/sof-ehl-rt5660/sof-ehl-rt5660.conf
+/usr/share/alsa/ucm2/Intel/sof-hda-dsp/Hdmi.conf
+/usr/share/alsa/ucm2/Intel/sof-hda-dsp/HiFi.conf
+/usr/share/alsa/ucm2/Intel/sof-hda-dsp/sof-hda-dsp.conf
+/usr/share/alsa/ucm2/MediaTek/mtk-rt5650/HDMI.conf
+/usr/share/alsa/ucm2/MediaTek/mtk-rt5650/HiFi.conf
+/usr/share/alsa/ucm2/MediaTek/mtk-rt5650/init.conf
+/usr/share/alsa/ucm2/MediaTek/mtk-rt5650/mtk-rt5650.conf
+/usr/share/alsa/ucm2/NXP/iMX8/Librem_5_Devkit/HiFi.conf
+"/usr/share/alsa/ucm2/NXP/iMX8/Librem_5_Devkit/Librem 5 Devkit.conf"
 /usr/share/alsa/ucm2/OMAP/abe-twl6040/Pandaboard/FMAnalog.conf
 /usr/share/alsa/ucm2/OMAP/abe-twl6040/Pandaboard/HiFi.conf
 /usr/share/alsa/ucm2/OMAP/abe-twl6040/Pandaboard/HiFiLP.conf
@@ -104,6 +164,9 @@ cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-lic
 /usr/share/alsa/ucm2/Qualcomm/apq8096/HDMI.conf
 /usr/share/alsa/ucm2/Qualcomm/apq8096/HiFi.conf
 /usr/share/alsa/ucm2/Qualcomm/apq8096/apq8096.conf
+/usr/share/alsa/ucm2/Qualcomm/sc7180/rt5682-max98357a/HiFi.conf
+/usr/share/alsa/ucm2/Qualcomm/sc7180/rt5682-max98357a/init.conf
+/usr/share/alsa/ucm2/Qualcomm/sc7180/rt5682-max98357a/sc7180-rt5682-max98357a-1mic.conf
 /usr/share/alsa/ucm2/Qualcomm/sdm845/HDMI.conf
 /usr/share/alsa/ucm2/Qualcomm/sdm845/HiFi.conf
 /usr/share/alsa/ucm2/Qualcomm/sdm845/sdm845.conf
@@ -111,12 +174,12 @@ cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-lic
 /usr/share/alsa/ucm2/Qualcomm/sm8250/HiFi.conf
 /usr/share/alsa/ucm2/Qualcomm/sm8250/Qualcomm-RB5-WSA8815-Speakers-DMIC0.conf
 /usr/share/alsa/ucm2/README.md
+/usr/share/alsa/ucm2/Rockchip/es8316/HiFi.conf
+/usr/share/alsa/ucm2/Rockchip/es8316/es8316.conf
 /usr/share/alsa/ucm2/Rockchip/max98090/HiFi.conf
 /usr/share/alsa/ucm2/Rockchip/max98090/max98090.conf
 /usr/share/alsa/ucm2/Rockchip/rk3399-gru-sound/HiFi.conf
 /usr/share/alsa/ucm2/Rockchip/rk3399-gru-sound/rk3399-gru-sound.conf
-/usr/share/alsa/ucm2/SOF/HiFi.conf
-/usr/share/alsa/ucm2/SOF/SOF.conf
 /usr/share/alsa/ucm2/Samsung/snow/HiFi.conf
 /usr/share/alsa/ucm2/Samsung/snow/snow.conf
 /usr/share/alsa/ucm2/Tegra/alc5632/HiFi.conf
@@ -130,50 +193,23 @@ cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-lic
 /usr/share/alsa/ucm2/Tegra/tegra-hda/tegra-hda.conf
 /usr/share/alsa/ucm2/Tegra/wm8903/Acer-A500-HiFi.conf
 /usr/share/alsa/ucm2/Tegra/wm8903/Acer-A500.conf
-/usr/share/alsa/ucm2/USB-Audio/Dell-WD15-Dock-HiFi.conf
-/usr/share/alsa/ucm2/USB-Audio/Dell-WD15-Dock.conf
-/usr/share/alsa/ucm2/USB-Audio/Gigabyte-Aorus-Master-Front-Headphone.conf
-/usr/share/alsa/ucm2/USB-Audio/Gigabyte-Aorus-Master-Main-Audio-HiFi.conf
-/usr/share/alsa/ucm2/USB-Audio/Gigabyte-Aorus-Master-Main-Audio.conf
-/usr/share/alsa/ucm2/USB-Audio/Lenovo-ThinkStation-P620-Main-HiFi.conf
-/usr/share/alsa/ucm2/USB-Audio/Lenovo-ThinkStation-P620-Main.conf
-/usr/share/alsa/ucm2/USB-Audio/Lenovo-ThinkStation-P620-Rear-HiFi.conf
-/usr/share/alsa/ucm2/USB-Audio/Lenovo-ThinkStation-P620-Rear.conf
-/usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop-HiFi.conf
-/usr/share/alsa/ucm2/USB-Audio/Realtek-ALC1220-VB-Desktop.conf
-/usr/share/alsa/ucm2/bdw-rt5677/HiFi.conf
-/usr/share/alsa/ucm2/bdw-rt5677/bdw-rt5677.conf
-/usr/share/alsa/ucm2/broadwell-rt286/HiFi.conf
-/usr/share/alsa/ucm2/broadwell-rt286/broadwell-rt286.conf
-/usr/share/alsa/ucm2/broxton-rt298/Hdmi.conf
-/usr/share/alsa/ucm2/broxton-rt298/HiFi.conf
-/usr/share/alsa/ucm2/broxton-rt298/broxton-rt298.conf
-/usr/share/alsa/ucm2/bytcht-cx2072x/HiFi.conf
-/usr/share/alsa/ucm2/bytcht-cx2072x/bytcht-cx2072x.conf
-/usr/share/alsa/ucm2/bytcht-es8316/HiFi-Components.conf
-/usr/share/alsa/ucm2/bytcht-es8316/HiFi-LongName.conf
-/usr/share/alsa/ucm2/bytcht-es8316/HiFi.conf
-/usr/share/alsa/ucm2/bytcht-es8316/bytcht-es8316.conf
-/usr/share/alsa/ucm2/bytcr-rt5640/HiFi-Components.conf
-/usr/share/alsa/ucm2/bytcr-rt5640/HiFi-LongName.conf
-/usr/share/alsa/ucm2/bytcr-rt5640/HiFi.conf
-/usr/share/alsa/ucm2/bytcr-rt5640/bytcr-rt5640.conf
-/usr/share/alsa/ucm2/bytcr-rt5651/HiFi-Components.conf
-/usr/share/alsa/ucm2/bytcr-rt5651/HiFi-LongName.conf
-/usr/share/alsa/ucm2/bytcr-rt5651/HiFi.conf
-/usr/share/alsa/ucm2/bytcr-rt5651/bytcr-rt5651.conf
-/usr/share/alsa/ucm2/bytcr-wm5102/HiFi.conf
-/usr/share/alsa/ucm2/bytcr-wm5102/bytcr-wm5102.conf
-/usr/share/alsa/ucm2/cht-bsw-rt5672/HiFi.conf
-/usr/share/alsa/ucm2/cht-bsw-rt5672/cht-bsw-rt5672.conf
-/usr/share/alsa/ucm2/chtmax98090/HiFi.conf
-/usr/share/alsa/ucm2/chtmax98090/chtmax98090.conf
-/usr/share/alsa/ucm2/chtnau8824/HiFi.conf
-/usr/share/alsa/ucm2/chtnau8824/chtnau8824.conf
-/usr/share/alsa/ucm2/chtrt5645/HiFi.conf
-/usr/share/alsa/ucm2/chtrt5645/chtrt5645.conf
-/usr/share/alsa/ucm2/chtrt5650/HiFi.conf
-/usr/share/alsa/ucm2/chtrt5650/chtrt5650.conf
+/usr/share/alsa/ucm2/USB-Audio/Dell/Desktop-Front-Speaker-Headset.conf
+/usr/share/alsa/ucm2/USB-Audio/Dell/Desktop-Front.conf
+/usr/share/alsa/ucm2/USB-Audio/Dell/Desktop-Rear-Line.conf
+/usr/share/alsa/ucm2/USB-Audio/Dell/Desktop-Rear.conf
+/usr/share/alsa/ucm2/USB-Audio/Dell/WD15-Dock-HiFi.conf
+/usr/share/alsa/ucm2/USB-Audio/Dell/WD15-Dock.conf
+/usr/share/alsa/ucm2/USB-Audio/Gigabyte/Aorus-Master-Main-Audio-HiFi.conf
+/usr/share/alsa/ucm2/USB-Audio/Gigabyte/Aorus-Master-Main-Audio.conf
+/usr/share/alsa/ucm2/USB-Audio/GoXLR/GoXLR-HiFi.conf
+/usr/share/alsa/ucm2/USB-Audio/GoXLR/GoXLR.conf
+/usr/share/alsa/ucm2/USB-Audio/Lenovo/ThinkStation-P620-Main-HiFi.conf
+/usr/share/alsa/ucm2/USB-Audio/Lenovo/ThinkStation-P620-Main.conf
+/usr/share/alsa/ucm2/USB-Audio/Lenovo/ThinkStation-P620-Rear-HiFi.conf
+/usr/share/alsa/ucm2/USB-Audio/Lenovo/ThinkStation-P620-Rear.conf
+/usr/share/alsa/ucm2/USB-Audio/Realtek/ALC1220-VB-Desktop-HiFi.conf
+/usr/share/alsa/ucm2/USB-Audio/Realtek/ALC1220-VB-Desktop.conf
+/usr/share/alsa/ucm2/USB-Audio/USB-Audio.conf
 /usr/share/alsa/ucm2/codecs/cx2072x/DisableSeq.conf
 /usr/share/alsa/ucm2/codecs/cx2072x/EnableSeq.conf
 /usr/share/alsa/ucm2/codecs/cx2072x/HeadPhones.conf
@@ -208,7 +244,9 @@ cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-lic
 /usr/share/alsa/ucm2/codecs/rt5640/DigitalMics.conf
 /usr/share/alsa/ucm2/codecs/rt5640/EnableSeq.conf
 /usr/share/alsa/ucm2/codecs/rt5640/HeadPhones.conf
+/usr/share/alsa/ucm2/codecs/rt5640/HeadPhones2.conf
 /usr/share/alsa/ucm2/codecs/rt5640/HeadsetMic.conf
+/usr/share/alsa/ucm2/codecs/rt5640/HeadsetMic2-IN1.conf
 /usr/share/alsa/ucm2/codecs/rt5640/IN1-InternalMic.conf
 /usr/share/alsa/ucm2/codecs/rt5640/IN3-InternalMic.conf
 /usr/share/alsa/ucm2/codecs/rt5640/MonoSpeaker.conf
@@ -265,10 +303,41 @@ cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-lic
 /usr/share/alsa/ucm2/codecs/wsa881x/DefaultEnableSeq.conf
 /usr/share/alsa/ucm2/codecs/wsa881x/SpeakerDisableSeq.conf
 /usr/share/alsa/ucm2/codecs/wsa881x/SpeakerEnableSeq.conf
+/usr/share/alsa/ucm2/common/linked-card.conf
+/usr/share/alsa/ucm2/common/linked.conf
 /usr/share/alsa/ucm2/conf.d/DB410c/DB410c.conf
 /usr/share/alsa/ucm2/conf.d/DB820c/DB820c.conf
+/usr/share/alsa/ucm2/conf.d/HDA-Intel/HDA-Intel.conf
+/usr/share/alsa/ucm2/conf.d/SC7180/sc7180-rt5682-max98357a-1mic.conf
+/usr/share/alsa/ucm2/conf.d/SOF/SOF.conf
+/usr/share/alsa/ucm2/conf.d/USB-Audio/USB-Audio.conf
+/usr/share/alsa/ucm2/conf.d/acp/acp.conf
+/usr/share/alsa/ucm2/conf.d/bdw-rt5677/bdw-rt5677.conf
+/usr/share/alsa/ucm2/conf.d/broadwell-rt286/broadwell-rt286.conf
+/usr/share/alsa/ucm2/conf.d/broxton-rt298/broxton-rt298.conf
+/usr/share/alsa/ucm2/conf.d/bytcht-cx2072x/bytcht-cx2072x.conf
+/usr/share/alsa/ucm2/conf.d/bytcht-es8316/bytcht-es8316.conf
+/usr/share/alsa/ucm2/conf.d/bytcr-rt5640/bytcr-rt5640.conf
+/usr/share/alsa/ucm2/conf.d/bytcr-rt5651/bytcr-rt5651.conf
+/usr/share/alsa/ucm2/conf.d/bytcr-wm5102/bytcr-wm5102.conf
+/usr/share/alsa/ucm2/conf.d/cht-bsw-rt5672/cht-bsw-rt5672.conf
+/usr/share/alsa/ucm2/conf.d/chtmax98090/chtmax98090.conf
+/usr/share/alsa/ucm2/conf.d/chtnau8824/chtnau8824.conf
+/usr/share/alsa/ucm2/conf.d/chtrt5645/chtrt5645.conf
+/usr/share/alsa/ucm2/conf.d/chtrt5650/chtrt5650.conf
+/usr/share/alsa/ucm2/conf.d/hda-dsp/hda-dsp.conf
+/usr/share/alsa/ucm2/conf.d/kblrt5660/kblrt5660.conf
+/usr/share/alsa/ucm2/conf.d/mtk-rt5650/mtk-rt5650.conf
+/usr/share/alsa/ucm2/conf.d/rockchip_es8316/rockchip_es8316.conf
 /usr/share/alsa/ucm2/conf.d/sdm845/DB845c.conf
+"/usr/share/alsa/ucm2/conf.d/simple-card/Librem 5 Devkit.conf"
+/usr/share/alsa/ucm2/conf.d/skylake-rt286/skylake-rt286.conf
 /usr/share/alsa/ucm2/conf.d/sm8250/Qualcomm-RB5-WSA8815-Speakers-DMIC0.conf
+/usr/share/alsa/ucm2/conf.d/sof-ehl-rt5660/sof-ehl-rt5660.conf
+/usr/share/alsa/ucm2/conf.d/sof-hda-dsp/sof-hda-dsp.conf
+/usr/share/alsa/ucm2/conf.d/sof-hda-dsp/sof-skl_hda_card.conf
+/usr/share/alsa/ucm2/conf.d/sof-skl_hda_card
+/usr/share/alsa/ucm2/conf.d/sof-soundwire/sof-soundwire.conf
 /usr/share/alsa/ucm2/conf.d/tegra-hda/tegra-hda.conf
 "/usr/share/alsa/ucm2/conf.d/tegra/ASUS Google Nexus 7 ALC5642.conf"
 "/usr/share/alsa/ucm2/conf.d/tegra/Acer Iconia Tab A500 WM8903.conf"
@@ -276,19 +345,9 @@ cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-lic
 /usr/share/alsa/ucm2/conf.d/tegra/GoogleNyanBig.conf
 /usr/share/alsa/ucm2/conf.d/tegra/GoogleNyanBlaze.conf
 /usr/share/alsa/ucm2/conf.virt.d/.gitignore
-/usr/share/alsa/ucm2/hda-dsp/Hdmi1.conf
-/usr/share/alsa/ucm2/hda-dsp/Hdmi2.conf
-/usr/share/alsa/ucm2/hda-dsp/HiFi.conf
-/usr/share/alsa/ucm2/hda-dsp/hda-dsp.conf
-/usr/share/alsa/ucm2/kblrt5660/Hdmi1.conf
-/usr/share/alsa/ucm2/kblrt5660/Hdmi2.conf
-/usr/share/alsa/ucm2/kblrt5660/HiFi.conf
-/usr/share/alsa/ucm2/kblrt5660/kblrt5660.conf
 /usr/share/alsa/ucm2/lib/card-init.conf
 /usr/share/alsa/ucm2/lib/ctl-remap.conf
 /usr/share/alsa/ucm2/lib/generic.conf
-/usr/share/alsa/ucm2/module/lib/linked.conf
-/usr/share/alsa/ucm2/module/snd_acp3x_rn.conf
 /usr/share/alsa/ucm2/module/snd_soc_apq8016_sbc.conf
 /usr/share/alsa/ucm2/module/snd_soc_apq8096.conf
 /usr/share/alsa/ucm2/module/snd_soc_omap_abe_twl6040.conf
@@ -300,13 +359,6 @@ cp %{_builddir}/alsa-ucm-conf-1.2.5.1/LICENSE %{buildroot}/usr/share/package-lic
 /usr/share/alsa/ucm2/module/snd_soc_tegra_max98090.conf
 /usr/share/alsa/ucm2/platforms/bytcr/PlatformDisableSeq.conf
 /usr/share/alsa/ucm2/platforms/bytcr/PlatformEnableSeq.conf
-/usr/share/alsa/ucm2/skylake-rt286/Hdmi1.conf
-/usr/share/alsa/ucm2/skylake-rt286/Hdmi2.conf
-/usr/share/alsa/ucm2/skylake-rt286/HiFi.conf
-/usr/share/alsa/ucm2/skylake-rt286/skylake-rt286.conf
-/usr/share/alsa/ucm2/sof-hda-dsp/Hdmi.conf
-/usr/share/alsa/ucm2/sof-hda-dsp/HiFi.conf
-/usr/share/alsa/ucm2/sof-hda-dsp/sof-hda-dsp.conf
 /usr/share/alsa/ucm2/sof-soundwire/Hdmi.conf
 /usr/share/alsa/ucm2/sof-soundwire/HiFi.conf
 /usr/share/alsa/ucm2/sof-soundwire/dmic.conf

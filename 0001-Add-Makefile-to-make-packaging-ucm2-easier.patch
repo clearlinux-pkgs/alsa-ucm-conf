@@ -1,4 +1,4 @@
-From 790e5f2ed96bcf4bc59579d7d50dfe98c74a87f2 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Auke Kok <auke-jan.h.kok@intel.com>
 Date: Thu, 5 Mar 2020 21:33:59 -0800
 Subject: [PATCH] Add Makefile to make packaging ucm2 easier.
@@ -21,6 +21,3 @@ index 0000000..86f8d40
 +install:
 +	mkdir -p $(DESTDIR)/usr/share/alsa/ucm2
 +	cp -arv ucm2/* $(DESTDIR)/usr/share/alsa/ucm2/
--- 
-2.25.1
-
