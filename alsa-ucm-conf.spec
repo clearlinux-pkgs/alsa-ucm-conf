@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x8380596DA6E59C91 (release@alsa-project.org)
 #
 Name     : alsa-ucm-conf
-Version  : 1.2.7
-Release  : 9
-URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.tar.bz2
-Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.tar.bz2
-Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.tar.bz2.sig
+Version  : 1.2.7.1
+Release  : 10
+URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.1.tar.bz2
+Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.1.tar.bz2
+Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.1.tar.bz2.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -42,8 +42,8 @@ license components for the alsa-ucm-conf package.
 
 
 %prep
-%setup -q -n alsa-ucm-conf-1.2.7
-cd %{_builddir}/alsa-ucm-conf-1.2.7
+%setup -q -n alsa-ucm-conf-1.2.7.1
+cd %{_builddir}/alsa-ucm-conf-1.2.7.1
 %patch1 -p1
 
 %build
@@ -51,7 +51,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1654104777
+export SOURCE_DATE_EPOCH=1656127399
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -64,10 +64,10 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1654104777
+export SOURCE_DATE_EPOCH=1656127399
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alsa-ucm-conf
-cp %{_builddir}/alsa-ucm-conf-1.2.7/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f
+cp %{_builddir}/alsa-ucm-conf-1.2.7.1/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f
 %make_install
 
 %files
@@ -140,6 +140,8 @@ cp %{_builddir}/alsa-ucm-conf-1.2.7/LICENSE %{buildroot}/usr/share/package-licen
 /usr/share/alsa/ucm2/Intel/sof-hda-dsp/Hdmi.conf
 /usr/share/alsa/ucm2/Intel/sof-hda-dsp/HiFi.conf
 /usr/share/alsa/ucm2/Intel/sof-hda-dsp/sof-hda-dsp.conf
+/usr/share/alsa/ucm2/MediaTek/mt8195_demo/HiFi.conf
+/usr/share/alsa/ucm2/MediaTek/mt8195_demo/mt8195_demo.conf
 /usr/share/alsa/ucm2/MediaTek/mtk-rt5650/HDMI.conf
 /usr/share/alsa/ucm2/MediaTek/mtk-rt5650/HiFi.conf
 /usr/share/alsa/ucm2/MediaTek/mtk-rt5650/init.conf
@@ -200,6 +202,10 @@ cp %{_builddir}/alsa-ucm-conf-1.2.7/LICENSE %{buildroot}/usr/share/package-licen
 /usr/share/alsa/ucm2/USB-Audio/Arturia/Minifuse-2.conf
 /usr/share/alsa/ucm2/USB-Audio/Audient/Audient-iD4-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/Audient/Audient-iD4.conf
+/usr/share/alsa/ucm2/USB-Audio/Behringer/Flow8-Recording-Hifi.conf
+/usr/share/alsa/ucm2/USB-Audio/Behringer/Flow8-Recording.conf
+/usr/share/alsa/ucm2/USB-Audio/Behringer/Flow8-Streaming-Hifi.conf
+/usr/share/alsa/ucm2/USB-Audio/Behringer/Flow8-Streaming.conf
 /usr/share/alsa/ucm2/USB-Audio/Behringer/UMC204HD-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/Behringer/UMC204HD.conf
 /usr/share/alsa/ucm2/USB-Audio/Dell/Desktop-Front-Speaker-Headset.conf
@@ -216,6 +222,8 @@ cp %{_builddir}/alsa-ucm-conf-1.2.7/LICENSE %{buildroot}/usr/share/package-licen
 /usr/share/alsa/ucm2/USB-Audio/Lenovo/ThinkStation-P620-Main.conf
 /usr/share/alsa/ucm2/USB-Audio/Lenovo/ThinkStation-P620-Rear-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/Lenovo/ThinkStation-P620-Rear.conf
+/usr/share/alsa/ucm2/USB-Audio/MOTU/M4-HiFi.conf
+/usr/share/alsa/ucm2/USB-Audio/MOTU/M4.conf
 /usr/share/alsa/ucm2/USB-Audio/Realtek/ALC1220-VB-Desktop-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/Realtek/ALC1220-VB-Desktop.conf
 /usr/share/alsa/ucm2/USB-Audio/Realtek/ALC4080-HiFi.conf
@@ -328,6 +336,7 @@ cp %{_builddir}/alsa-ucm-conf-1.2.7/LICENSE %{buildroot}/usr/share/package-licen
 /usr/share/alsa/ucm2/conf.d/SC7180/sc7180-rt5682-max98357a-1mic.conf
 /usr/share/alsa/ucm2/conf.d/SOF/SOF.conf
 /usr/share/alsa/ucm2/conf.d/USB-Audio/USB-Audio.conf
+/usr/share/alsa/ucm2/conf.d/VEYRON-I2S/VEYRON-I2S.conf
 /usr/share/alsa/ucm2/conf.d/acp/acp.conf
 /usr/share/alsa/ucm2/conf.d/acp6x/acp6x.conf
 /usr/share/alsa/ucm2/conf.d/bdw-rt5677/bdw-rt5677.conf
@@ -345,7 +354,9 @@ cp %{_builddir}/alsa-ucm-conf-1.2.7/LICENSE %{buildroot}/usr/share/package-licen
 /usr/share/alsa/ucm2/conf.d/chtrt5650/chtrt5650.conf
 /usr/share/alsa/ucm2/conf.d/hda-dsp/hda-dsp.conf
 /usr/share/alsa/ucm2/conf.d/kblrt5660/kblrt5660.conf
+/usr/share/alsa/ucm2/conf.d/mt8195_demo/mt8195_demo.conf
 /usr/share/alsa/ucm2/conf.d/mtk-rt5650/mtk-rt5650.conf
+/usr/share/alsa/ucm2/conf.d/rk3399-gru-soun/rk3399-gru-soun.conf
 /usr/share/alsa/ucm2/conf.d/rockchip_es8316/rockchip_es8316.conf
 /usr/share/alsa/ucm2/conf.d/sdm845/DB845c.conf
 "/usr/share/alsa/ucm2/conf.d/simple-card/Librem 5 Devkit.conf"
