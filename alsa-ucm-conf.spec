@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x8380596DA6E59C91 (release@alsa-project.org)
 #
 Name     : alsa-ucm-conf
-Version  : 1.2.7.1
-Release  : 10
-URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.1.tar.bz2
-Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.1.tar.bz2
-Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.1.tar.bz2.sig
+Version  : 1.2.7.2
+Release  : 11
+URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.2.tar.bz2
+Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.2.tar.bz2
+Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.7.2.tar.bz2.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -42,8 +42,8 @@ license components for the alsa-ucm-conf package.
 
 
 %prep
-%setup -q -n alsa-ucm-conf-1.2.7.1
-cd %{_builddir}/alsa-ucm-conf-1.2.7.1
+%setup -q -n alsa-ucm-conf-1.2.7.2
+cd %{_builddir}/alsa-ucm-conf-1.2.7.2
 %patch1 -p1
 
 %build
@@ -51,7 +51,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656127399
+export SOURCE_DATE_EPOCH=1657310897
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -64,10 +64,10 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1656127399
+export SOURCE_DATE_EPOCH=1657310897
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alsa-ucm-conf
-cp %{_builddir}/alsa-ucm-conf-1.2.7.1/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f
+cp %{_builddir}/alsa-ucm-conf-1.2.7.2/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f
 %make_install
 
 %files
@@ -200,8 +200,10 @@ cp %{_builddir}/alsa-ucm-conf-1.2.7.1/LICENSE %{buildroot}/usr/share/package-lic
 /usr/share/alsa/ucm2/Tegra/wm8903/Acer-A500.conf
 /usr/share/alsa/ucm2/USB-Audio/Arturia/Minifuse-2-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/Arturia/Minifuse-2.conf
-/usr/share/alsa/ucm2/USB-Audio/Audient/Audient-iD4-HiFi.conf
-/usr/share/alsa/ucm2/USB-Audio/Audient/Audient-iD4.conf
+/usr/share/alsa/ucm2/USB-Audio/Audient/Audient-iD4-0003.conf
+/usr/share/alsa/ucm2/USB-Audio/Audient/Audient-iD4-0009.conf
+/usr/share/alsa/ucm2/USB-Audio/Audient/Audient-iD4-HiFi-0003.conf
+/usr/share/alsa/ucm2/USB-Audio/Audient/Audient-iD4-HiFi-0009.conf
 /usr/share/alsa/ucm2/USB-Audio/Behringer/Flow8-Recording-Hifi.conf
 /usr/share/alsa/ucm2/USB-Audio/Behringer/Flow8-Recording.conf
 /usr/share/alsa/ucm2/USB-Audio/Behringer/Flow8-Streaming-Hifi.conf
@@ -224,6 +226,8 @@ cp %{_builddir}/alsa-ucm-conf-1.2.7.1/LICENSE %{buildroot}/usr/share/package-lic
 /usr/share/alsa/ucm2/USB-Audio/Lenovo/ThinkStation-P620-Rear.conf
 /usr/share/alsa/ucm2/USB-Audio/MOTU/M4-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/MOTU/M4.conf
+/usr/share/alsa/ucm2/USB-Audio/NativeInstruments/Traktor-Kontrol-Z1-Mixer.conf
+/usr/share/alsa/ucm2/USB-Audio/NativeInstruments/Traktor-Kontrol-Z1.conf
 /usr/share/alsa/ucm2/USB-Audio/Realtek/ALC1220-VB-Desktop-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/Realtek/ALC1220-VB-Desktop.conf
 /usr/share/alsa/ucm2/USB-Audio/Realtek/ALC4080-HiFi.conf
