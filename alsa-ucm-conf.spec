@@ -6,11 +6,11 @@
 # Source0 file verified with key 0x8380596DA6E59C91 (release@alsa-project.org)
 #
 Name     : alsa-ucm-conf
-Version  : 1.2.9
-Release  : 13
-URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.9.tar.bz2
-Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.9.tar.bz2
-Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.9.tar.bz2.sig
+Version  : 1.2.10
+Release  : 14
+URL      : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.10.tar.bz2
+Source0  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.10.tar.bz2
+Source1  : https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.10.tar.bz2.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -46,16 +46,19 @@ license components for the alsa-ucm-conf package.
 
 
 %prep
-%setup -q -n alsa-ucm-conf-1.2.9
-cd %{_builddir}/alsa-ucm-conf-1.2.9
-%patch1 -p1
+%setup -q -n alsa-ucm-conf-1.2.10
+cd %{_builddir}/alsa-ucm-conf-1.2.10
+%patch -P 1 -p1
+pushd ..
+cp -a alsa-ucm-conf-1.2.10 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683209475
+export SOURCE_DATE_EPOCH=1693924270
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -66,13 +69,25 @@ export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -f
 export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 make  %{?_smp_mflags}
 
+pushd ../buildavx2
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+make  %{?_smp_mflags}
+popd
 
 %install
-export SOURCE_DATE_EPOCH=1683209475
+export SOURCE_DATE_EPOCH=1693924270
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alsa-ucm-conf
 cp %{_builddir}/alsa-ucm-conf-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/alsa-ucm-conf/27f14a443d8b2c78e6684ac3bb2fee5d8364c78f || :
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -216,6 +231,8 @@ cp %{_builddir}/alsa-ucm-conf-%{version}/LICENSE %{buildroot}/usr/share/package-
 /usr/share/alsa/ucm2/Rockchip/max98090/max98090.conf
 /usr/share/alsa/ucm2/Rockchip/rk3399-gru-sound/HiFi.conf
 /usr/share/alsa/ucm2/Rockchip/rk3399-gru-sound/rk3399-gru-sound.conf
+/usr/share/alsa/ucm2/Rockchip/rk3588-es8316/HiFi.conf
+/usr/share/alsa/ucm2/Rockchip/rk3588-es8316/rk3588-es8316.conf
 /usr/share/alsa/ucm2/Rockchip/rk817-sound/HiFi.conf
 /usr/share/alsa/ucm2/Rockchip/rk817-sound/rk817-sound.conf
 /usr/share/alsa/ucm2/Samsung/snow/HiFi.conf
@@ -223,14 +240,21 @@ cp %{_builddir}/alsa-ucm-conf-%{version}/LICENSE %{buildroot}/usr/share/package-
 /usr/share/alsa/ucm2/Tegra/alc5632/HiFi.conf
 /usr/share/alsa/ucm2/Tegra/alc5632/Record.conf
 /usr/share/alsa/ucm2/Tegra/alc5632/alc5632.conf
+/usr/share/alsa/ucm2/Tegra/max98089/lge-x3-HiFi.conf
+/usr/share/alsa/ucm2/Tegra/max98089/lge-x3-VoiceCall.conf
+/usr/share/alsa/ucm2/Tegra/max98089/lge-x3.conf
 /usr/share/alsa/ucm2/Tegra/max98090/HiFi.conf
 /usr/share/alsa/ucm2/Tegra/max98090/max98090.conf
+/usr/share/alsa/ucm2/Tegra/rt5631/Asus-Transformer-HiFi.conf
+/usr/share/alsa/ucm2/Tegra/rt5631/Asus-Transformer.conf
 /usr/share/alsa/ucm2/Tegra/rt5640/Google-Nexus-7-HiFi.conf
 /usr/share/alsa/ucm2/Tegra/rt5640/Google-Nexus-7.conf
 /usr/share/alsa/ucm2/Tegra/tegra-hda/tegra-hda-HiFi.conf
 /usr/share/alsa/ucm2/Tegra/tegra-hda/tegra-hda.conf
 /usr/share/alsa/ucm2/Tegra/wm8903/Acer-A500-HiFi.conf
 /usr/share/alsa/ucm2/Tegra/wm8903/Acer-A500.conf
+/usr/share/alsa/ucm2/Tegra/wm8903/Asus-Transformer-HiFi.conf
+/usr/share/alsa/ucm2/Tegra/wm8903/Asus-Transformer.conf
 /usr/share/alsa/ucm2/USB-Audio/Arturia/Minifuse-12-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/Arturia/Minifuse-12.conf
 /usr/share/alsa/ucm2/USB-Audio/Arturia/Minifuse-4-HiFi.conf
@@ -285,6 +309,8 @@ cp %{_builddir}/alsa-ucm-conf-%{version}/LICENSE %{buildroot}/usr/share/package-
 /usr/share/alsa/ucm2/USB-Audio/Steinberg/UR44-HiFi.conf
 /usr/share/alsa/ucm2/USB-Audio/Steinberg/UR44.conf
 /usr/share/alsa/ucm2/USB-Audio/USB-Audio.conf
+/usr/share/alsa/ucm2/USB-Audio/UniversalAudio/Volt2-HiFi.conf
+/usr/share/alsa/ucm2/USB-Audio/UniversalAudio/Volt2.conf
 /usr/share/alsa/ucm2/codecs/cx2072x/DisableSeq.conf
 /usr/share/alsa/ucm2/codecs/cx2072x/EnableSeq.conf
 /usr/share/alsa/ucm2/codecs/cx2072x/HeadPhones.conf
@@ -413,6 +439,8 @@ cp %{_builddir}/alsa-ucm-conf-%{version}/LICENSE %{buildroot}/usr/share/package-
 /usr/share/alsa/ucm2/conf.d/acp/acp.conf
 /usr/share/alsa/ucm2/conf.d/acp3xalc5682m98/acp3xalc5682m98.conf
 /usr/share/alsa/ucm2/conf.d/acp5x/Valve-Jupiter-1.conf
+/usr/share/alsa/ucm2/conf.d/acp62/acp62.conf
+/usr/share/alsa/ucm2/conf.d/acp63/acp63.conf
 /usr/share/alsa/ucm2/conf.d/acp6x/acp6x.conf
 /usr/share/alsa/ucm2/conf.d/bdw-rt5677/bdw-rt5677.conf
 /usr/share/alsa/ucm2/conf.d/broadwell-rt286/broadwell-rt286.conf
@@ -434,6 +462,7 @@ cp %{_builddir}/alsa-ucm-conf-%{version}/LICENSE %{buildroot}/usr/share/package-
 /usr/share/alsa/ucm2/conf.d/mt8365-evk/mt8365-evk.conf
 /usr/share/alsa/ucm2/conf.d/mtk-rt5650/mtk-rt5650.conf
 /usr/share/alsa/ucm2/conf.d/rk3399-gru-soun/rk3399-gru-soun.conf
+/usr/share/alsa/ucm2/conf.d/rk3588-es8316/rk3588-es8316.conf
 /usr/share/alsa/ucm2/conf.d/rockchip_es8316/rockchip_es8316.conf
 /usr/share/alsa/ucm2/conf.d/sc8280xp/sc8280xp.conf
 /usr/share/alsa/ucm2/conf.d/sdm845/DB845c.conf
@@ -457,9 +486,18 @@ cp %{_builddir}/alsa-ucm-conf-%{version}/LICENSE %{buildroot}/usr/share/package-
 /usr/share/alsa/ucm2/conf.d/tegra-hda/tegra-hda.conf
 "/usr/share/alsa/ucm2/conf.d/tegra/ASUS Google Nexus 7 ALC5642.conf"
 "/usr/share/alsa/ucm2/conf.d/tegra/Acer Iconia Tab A500 WM8903.conf"
+"/usr/share/alsa/ucm2/conf.d/tegra/Asus EeePad Slider WM8903.conf"
+"/usr/share/alsa/ucm2/conf.d/tegra/Asus EeePad Transformer WM8903.conf"
+"/usr/share/alsa/ucm2/conf.d/tegra/Asus Transformer Infinity TF700T RT5631.conf"
+"/usr/share/alsa/ucm2/conf.d/tegra/Asus Transformer Pad TF300T WM8903.conf"
+"/usr/share/alsa/ucm2/conf.d/tegra/Asus Transformer Pad TF300TG RT5631.conf"
+"/usr/share/alsa/ucm2/conf.d/tegra/Asus Transformer Pad TF300TL RT5631.conf"
+"/usr/share/alsa/ucm2/conf.d/tegra/Asus Transformer Prime TF201 RT5631.conf"
 "/usr/share/alsa/ucm2/conf.d/tegra/Compal PAZ00.conf"
 /usr/share/alsa/ucm2/conf.d/tegra/GoogleNyanBig.conf
 /usr/share/alsa/ucm2/conf.d/tegra/GoogleNyanBlaze.conf
+"/usr/share/alsa/ucm2/conf.d/tegra/LG Optimus 4X HD MAX98089.conf"
+"/usr/share/alsa/ucm2/conf.d/tegra/LG Optimus Vu MAX98089.conf"
 /usr/share/alsa/ucm2/conf.virt.d/.gitignore
 /usr/share/alsa/ucm2/lib/card-init.conf
 /usr/share/alsa/ucm2/lib/ctl-remap.conf
